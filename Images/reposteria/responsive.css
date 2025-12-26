@@ -1,0 +1,88 @@
+/* ===================================== */
+/* ==== ESTILOS RESPONSIVE DEL SITIO ==== */
+/* ===================================== */
+
+/* --- Estilos para Tabletas y Móviles (hasta 992px) --- */
+@media (max-width: 992px) {
+
+    /* --- Ajustes para el Dashboard (profile.php, etc.) --- */
+    body.dashboard-body {
+        /* Cambiamos la dirección del layout a columna */
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%; /* El menú lateral ahora es una barra superior */
+        height: auto;
+        flex-direction: column; /* Apila el header y los menús */
+        padding: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(203, 161, 53, 0.2);
+    }
+
+    .sidebar-header {
+        display: flex;
+        flex-direction: row; /* Elementos internos en fila */
+        justify-content: space-between; /* Logo a la izq, botón a la der */
+        align-items: center;
+        width: 100%;
+        margin-bottom: 0;
+        padding: 0.5rem 1rem;
+    }
+    
+    .sidebar-header a {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .sidebar-header img {
+        max-width: 60px;
+    }
+    
+    /* Ocultamos la línea <hr> en móvil */
+    .sidebar hr {
+        display: none;
+    }
+
+    .sidebar-nav, .sidebar-footer {
+        display: none; /* Ocultamos los menús por defecto en móvil */
+        width: 100%;
+        background-color: var(--negro);
+        padding: 1rem;
+    }
+    
+    .sidebar-footer {
+        margin-top: 0;
+        border-top: 1px solid rgba(203, 161, 53, 0.2);
+    }
+
+    /* Clase que usará JavaScript para mostrar el menú */
+    .sidebar-nav.show, .sidebar-footer.show {
+        display: block;
+    }
+
+    /* Botón para mostrar/ocultar menú */
+    .sidebar-toggler {
+        display: block; /* Hacemos visible el botón del menú hamburguesa */
+        background: none;
+        border: 1px solid var(--dorado);
+        color: var(--dorado);
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 1.2rem;
+    }
+
+    .main-content {
+        padding: 1.5rem;
+    }
+    
+    /* ---- Ajustes para la Página Principal (index.php) ---- */
+    .navbar-collapse {
+        background-color: rgba(28, 28, 28, 0.98);
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 10px;
+        border: 1px solid rgba(203, 161, 53, 0.2);
+    }
+}

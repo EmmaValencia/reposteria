@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap'); /* Agregamos Playfair Display para títulos */
+
+:root {
+    --negro: #1C1C1C;
+    --dorado: #CBA135;
+    --crema: #FAF3E0;
+    --burdeos: #7B2D26;
+    --burdeos-claro: #A53D34;
+    --gris-oscuro: #2a2a2a;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--crema); /* Fondo crema suave */
+    color: var(--negro);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea arriba para evitar centrado excesivo */
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px 20px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+.receipt-container {
+    background-color: #ffffff; /* Fondo blanco para el comprobante */
+    padding: 50px; /* Más padding para un look premium */
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    max-width: 800px;
+    width: 100%;
+    border-top: 8px solid var(--dorado); /* Borde superior dorado prominente */
+    position: relative; /* Para el logo */
+    overflow: hidden; /* Asegura que nada se salga del contenedor */
+}
+
+/* Encabezado con logo y datos de la tienda */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--burdeos-claro); /* Línea divisoria elegante */
+}
+
+.company-logo img {
+    max-height: 80px; /* Tamaño del logo */
+    width: auto;
+}
+
+.receipt-info {
+    text-align: right;
+    color: var(--gris-oscuro);
+}
+
+.receipt-info p {
+    margin: 3px 0;
+    font-size: 0.95em;
+    font-weight: 400;
+}
+
+.receipt-info strong {
+    color: var(--negro);
+}
+
+/* Título principal del comprobante */
+.receipt-container h1 {
+    font-family: 'Playfair Display', serif; /* Fuente elegante para títulos */
+    font-weight: 700;
+    color: var(--burdeos); /* Título en burdeos */
+    font-size: 2.8em; /* Tamaño más grande */
+    margin-bottom: 15px;
+    text-align: center; /* Centrar el título */
+    text-transform: uppercase; /* Mayúsculas */
+    letter-spacing: 1.5px;
+}
+
+.receipt-container > p {
+    font-size: 1.05em;
+    color: var(--gris-oscuro);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Secciones de detalles (cliente, pedido) */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.8em;
+    color: var(--dorado); /* Títulos de sección en dorado */
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--crema); /* Línea sutil */
+    padding-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.order-details, .summary-details {
+    margin-top: 20px;
+    padding: 0;
+    background-color: transparent;
+    text-align: left;
+}
+
+.order-details div, .summary-details div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee; /* Línea separadora más limpia */
+    font-size: 1.05em;
+}
+
+.order-details div:last-child, .summary-details div:last-child {
+    border-bottom: none; /* Sin línea en el último elemento */
+}
+
+.order-details strong, .summary-details strong {
+    flex-grow: 1;
+    font-weight: 600;
+    color: var(--negro);
+}
+
+.order-details span, .summary-details span {
+    color: var(--burdeos-claro); /* Valores en un color distintivo */
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Tabla de artículos (si se usa HTML para mostrarla) */
+.item-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.item-table th, .item-table td {
+    border: 1px solid #eee;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.item-table th {
+    background-color: var(--crema); /* Fondo crema para encabezados de tabla */
+    color: var(--burdeos);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.item-table td {
+    color: var(--negro);
+    font-size: 0.95em;
+}
+
+.item-table tr:nth-child(even) {
+    background-color: #fcfcfc; /* Rayas para facilitar lectura */
+}
+
+/* Sección de totales */
+.summary-details {
+    margin-top: 50px;
+    border-top: 2px solid var(--dorado); /* Línea dorada para separar totales */
+    padding-top: 20px;
+}
+
+.total-line {
+    font-size: 1.4em !important;
+    font-weight: 700 !important;
+    border-top: 3px double var(--burdeos) !important; /* Doble línea burdeos para el total final */
+    padding-top: 15px !important;
+    color: var(--burdeos) !important;
+}
+
+.total-line span {
+    color: var(--burdeos) !important; /* Total en burdeos */
+    font-size: 1.4em !important;
+}
+
+/* Pie de página */
+.footer {
+    text-align: center;
+    margin-top: 60px;
+    border-top: 1px solid var(--crema);
+    padding-top: 25px;
+    font-size: 0.85em;
+    color: #888;
+}
+
+/* Botones y íconos */
+.receipt-icon {
+    font-size: 70px; /* Ícono más grande */
+    color: var(--dorado); /* Ícono de éxito en dorado */
+    margin-bottom: 25px;
+}
+
+.receipt-icon.error {
+    color: var(--burdeos-claro); /* Ícono de error en burdeos claro */
+}
+
+.download-button {
+    display: inline-block;
+    background-color: var(--burdeos); /* Botón en burdeos */
+    color: #ffffff;
+    padding: 16px 35px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 40px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.15em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.download-button:hover {
+    background-color: var(--burdeos-claro); /* Hover en burdeos claro */
+    transform: translateY(-3px);
+}
+
+.back-to-shop {
+    margin-top: 25px;
+    font-size: 0.95em;
+}
+
+.back-to-shop a {
+    color: var(--negro);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.back-to-shop a:hover {
+    color: var(--burdeos); /* Hover en burdeos */
+}
+
+/* Media Query para Impresión (Mismo que antes, pero con colores ajustados para PDF) */
+@media print {
+    body {
+        background-color: #fff !important;
+        display: block;
+        min-height: auto;
+        padding: 0;
+    }
+
+    .receipt-container {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+        padding: 0;
+        max-width: none;
+    }
+
+    .header {
+        border-bottom: 2px solid var(--burdeos); /* Línea de encabezado en burdeos para impresión */
+    }
+
+    /* Ocultar elementos de UI */
+    .download-button, .back-to-shop, .receipt-icon {
+        display: none !important;
+    }
+}

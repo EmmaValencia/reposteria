@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/vendor"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/uploads"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/personalizador"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/fpdf"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/PHPMailer"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/Mesas3D"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/MercadoPago"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/Images"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/Juego"
+		},
+		{
+			"path": "../../../../Downloads/public_html (1)/Galeria3D"
+		}
+	],
+	"settings": {}
+}

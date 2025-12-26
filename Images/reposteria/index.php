@@ -1,0 +1,390 @@
+<?php session_start(); // Inicia la sesión para poder comprobar si el usuario ha iniciado sesión ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores de Cristal Repostería</title>
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="Images/LOGO-min.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Images/LOGO-min.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="Images/LOGO-min.png">
+    <link rel="shortcut icon" href="Images/LOGO-min.png">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap'>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div id="background-stains"></div>
+
+<header class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.php">
+            <img src="Images/LOGO.png" alt="Logo Sabores de Cristal">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item"><a class="nav-link" href="tienda.php">Tienda</a></li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.php" aria-label="Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                </li>
+
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> Mi Cuenta
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="profile.php">Mi Perfil</a></li>
+                            
+                           
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="logout.php">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-cta" href="login.php">Iniciar Sesión</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+</header>
+    <main>
+        <section id="hero-parallax">
+            <article class="parallax-card">
+                <div class="assets">
+                    <img src="Images/banner.jpg" alt="Fondo de postres" />
+                    <h3>SABORES DE CRISTAL</h3>
+                    <img src="Images/LOGO-min.png" alt="Logo" class="parallax-foreground-item" />
+                </div>
+                <div class="blur">
+                    <div class="layer" style="--index:1;"></div>
+                    <div class="layer" style="--index:2;"></div>
+                    <div class="layer" style="--index:3;"></div>
+                    <div class="layer" style="--index:4;"></div>
+                    <div class="layer" style="--index:5;"></div>
+                </div>
+                <div class="content">
+                    <p>
+                      <i class="fas fa-map-marker-alt"></i>
+                      Sabores de Cristal Repostería
+                    </p>
+                    <p><i>"Tu antojo, nuestra inspiración."</i></p>
+                </div>
+            </article>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="flyers">
+            <h3 class="subtitulo-seccion">Promociones Especiales</h3>
+            <div class="flyer-slider-container">
+                <div class="slide">
+                    <div class="item" style="background-image: url('Images/Flyer-1-bg-min.jpg');">
+                        <div class="content">
+                            <div class="name">Un Lujo para tu Paladar</div>
+                            <div class="des">Descubre la elegancia en cada bocado con nuestros postres finos.</div>
+                        </div>
+                        <div class="image-container">
+                           <img src="Images/Flyer 1-min.png" alt="Flyer Promoción 1">
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('Images/Flyer-2-bg-min.jpg');">
+                        <div class="content">
+                            <div class="name">Café & Postre</div>
+                            <div class="des">La combinación perfecta te espera. Recibe un café de cortesía.</div>
+                        </div>
+                         <div class="image-container">
+                           <img src="Images/Flyer 2-min.jpeg" alt="Flyer Promoción 2">
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('Images/Flyer-3-bg-min.jpg');">
+                        <div class="content">
+                            <div class="name">El Secreto de la Felicidad</div>
+                            <div class="des">Un postre para cada deseo. Encuentra tu creación favorita.</div>
+                        </div>
+                         <div class="image-container">
+                           <img src="Images/Flyer 3-min.jpeg" alt="Flyer Promoción 3">
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('Images/Flyer-4-bg-min.jpg');">
+                        <div class="content">
+                            <div class="name">Sábado de Brunch</div>
+                            <div class="des">Disfruta de nuestro menú especial de Viernes a Domingo.</div>
+                        </div>
+                         <div class="image-container">
+                           <img src="Images/Flyer-5-bg-min.jpg" alt="Flyer Promoción 4">
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('Images/Flyer-6-bg-min.jpg');">
+                        <div class="content">
+                            <div class="name">Dulces y Suaves</div>
+                            <div class="des">Horneados diariamente para garantizar la máxima frescura.</div>
+                        </div>
+                         <div class="image-container">
+                           <img src="Images/Flyer 6-min.jpeg" alt="Flyer Promoción 5">
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <button class="prev">◁</button>
+                    <button class="next">▷</button>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="creaciones-carousel">
+            <div class="container">
+                <h3 class="subtitulo-seccion">Nuestras Creaciones</h3>
+                <div class="swiper-container coverflow-carousel">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" style="background-image:url(Images/Dia%20de%20Muertos-min.jpeg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/Pan%20de%20muerto-min.jpeg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/Rollo%20canela-min.jpeg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/Croissant-min.jpeg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/Pumpkin%20seed-min.jpeg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/Challah-min.jpeg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/cheesecake.jpg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/dona_chocolate.jpg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/pay_calabaza.jpg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/muffin_arandanos.jpg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/baguette.jpg)"></div>
+                        <div class="swiper-slide" style="background-image:url(Images/frutos_rojos.jpg)"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="galeria">
+            <div class="container">
+                <h3 class="subtitulo-seccion">Galería Interactiva</h3>
+                
+                <div class="blinds-gallery-container">
+                    <div class="blinds-gallery gallery-instance-1">
+                        <div class="h">Pan de Temporada</div>
+                        <div class="w">
+                            <?php for ($i = 0; $i < 50; $i++): ?>
+                                <div class="i"></div>
+                            <?php endfor; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blinds-gallery-container">
+                    <div class="blinds-gallery gallery-instance-2">
+                        <div class="h">Nuestros Clásicos</div>
+                        <div class="w">
+                            <?php for ($i = 0; $i < 50; $i++): ?>
+                                <div class="i"></div>
+                            <?php endfor; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+        
+        <section id="promocion">
+            <div class="container">
+                <h2 class="subtitulo-seccion">Asistente Virtual</h2>
+                <div class="row">
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="assistant-card animate pop">
+                            <div class="overlay">
+                                <div class="overlay-content animate slide-left delay-2">
+                                    <h4 class="animate slide-left pop delay-4">Nuestro Anfitrión</h4>
+                                    <p class="animate slide-left pop delay-5">Permítenos presentarte a nuestro anfitrión digital. Él será tu guía para un viaje visual por el corazón de nuestra cocina.</p>
+                                </div>
+                                <div class="image-content animate slide delay-5" style="background-image: url('Images/Miniatura de asistente virtual-min.jpeg');"></div>
+                            </div>
+                            <div class="text">
+                                <video src="Images/Asistente.mp4" loop playsinline></video>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="assistant-card animate pop">
+                            <div class="overlay">
+                                <div class="overlay-content animate slide-left delay-2">
+                                    <h4 class="animate slide-left pop delay-4">Invitación Especial</h4>
+                                    <p class="animate slide-left pop delay-5">Hay un mundo de sabor esperándote. Te damos la bienvenida a Sabores de Cristal, un lugar donde la pasión y los ingredientes de calidad se unen.</p>
+                                </div>
+                                <div class="image-content animate slide delay-5" style="background-image: url('Images/Miniatura ven a conocernos-min.jpeg');"></div>
+                            </div>
+                            <div class="text">
+                                <video src="Images/Ven a conocernos.mp4" loop playsinline></video>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="assistant-card animate pop">
+                            <div class="overlay">
+                                <div class="overlay-content animate slide-left delay-2">
+                                    <h4 class="animate slide-left pop delay-4">Cada Bocado</h4>
+                                    <p class="animate slide-left pop delay-5">Te invitamos a un viaje al corazón de Sabores de Cristal, donde cada ingrediente se selecciona con esmero y cada postre se elabora a mano.</p>
+                                </div>
+                                <div class="image-content animate slide delay-5" style="background-image: url('Images/Miniatura de nuestros productos-min.jpeg');"></div>
+                            </div>
+                            <div class="text">
+                                <video src="Images/Nuestros productos.mp4" loop playsinline></video>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <hr class="section-divider">
+
+        <section id="contacto">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-7 mb-5 mb-lg-0">
+                        <h2 class="subtitulo-seccion text-center text-lg-start">Envíanos un Mensaje</h2>
+                        <form action="enviar.php" method="POST" class="contact-form">
+                            <div class="input-group">
+                                <input type="text" id="nombre" name="nombre" required>
+                                <label for="nombre"><i class="fas fa-user"></i> Tu Nombre</label>
+                            </div>
+                             <div class="input-group">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email"><i class="fas fa-envelope"></i> Tu Correo Electrónico</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="asunto" name="asunto" required>
+                                <label for="asunto"><i class="fas fa-tag"></i> Asunto</label>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
+                                <label for="mensaje"><i class="fas fa-comments"></i> Tu Mensaje</label>
+                            </div>
+                            <button type="submit">Enviar Mensaje <i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                    <div class="col-12 col-lg-5 ps-lg-5">
+                        <h3 class="mb-4 text-center text-lg-start">Información</h3>
+                        <ul class="list-unstyled contact-info">
+                            <li><i class="fas fa-map-marker-alt"></i> Universidad Tecnológica de Nezahualcóyotl</li>
+                            <li><i class="fas fa-phone"></i> +52 55 1234 5678</li>
+                            <li><i class="fas fa-envelope"></i> contacto@saboresdecristal.com</li>
+                        </ul>
+                        <h3 class="mt-5 mb-4 text-center text-lg-start">Horarios</h3>
+                        <ul class="list-unstyled">
+                            <li><strong>L-V:</strong> 9:00 AM - 8:00 PM</li>
+                            <li><strong>Sáb:</strong> 10:00 AM - 9:00 PM</li>
+                            <li><strong>Dom:</strong> Cerrado</li>
+                        </ul>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2479.6088798513233!2d-98.98553650937028!3d19.40322948886695!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e3315788b631%3A0x667690c1499579bf!2sUTN%20-%20Universidad%20Tecnol%C3%B3gica%20de%20Nezahualc%C3%B3yotl!5e0!3m2!1ses!2smx!4v1763350419199!5m2!1ses!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-4 mb-4 mb-lg-0 text-center text-lg-start">
+                        <img src="Images/LOGO-min.png" alt="Logo Sabores de Cristal" class="mb-3 footer-logo">
+                        <p class="slogan-footer">Sabores de Cristal Repostería</p>
+                        <p class="text-white-50">"Tu antojo, nuestra inspiración."</p>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-2 mb-4 mb-lg-0">
+                        <h5>Navegación</h5>
+                        <ul class="list-unstyled footer-links">
+                            <li><a href="#hero-parallax">Inicio</a></li>
+                            <li><a href="#creaciones-carousel">Creaciones</a></li>
+                            <li><a href="#promocion">Asistente</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        <h5>Contacto</h5>
+                        <ul class="list-unstyled footer-links">
+                            <li><i class="fas fa-phone"></i> +52 55 1234 5678</li>
+                            <li>contacto@saboresdecristal.com</li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-3 text-center text-lg-end">
+                        <h5>Síguenos</h5>
+                        <div class="social-icons justify-content-center justify-content-lg-end">
+                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://wa.me/message/LPG6PCF2MNNKH1" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center text-white-50 pt-4 mt-4 border-top border-secondary">
+                    © 2025 Sabores de Cristal Repostería.
+                </div>
+            </div>
+        </div>
+    </footer>
+        <div class="modal fade" id="promoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-promo">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <img src="Images/Menu-min.png" class="img-fluid" alt="Promoción">
+                    <div class="promo-text">
+                        <p>"Muestra este Menu y obtén un 15% de descuento!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="form-notification" class="notification-hidden">
+        <div class="notification-content">
+            <i class="notification-icon fas"></i>
+            <div>
+                <h5 class="notification-title"></h5>
+                <p class="notification-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/message/LPG6PCF2MNNKH1" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="whatsapp-float"
+       id="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script src="script.js" defer></script>
+    <script src="//code.tidio.co/hozkxtcboflla4min0ycifog36zo1tz9.js" async></script>
+</body>
+</html>

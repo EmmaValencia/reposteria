@@ -1,0 +1,7 @@
+{
+    "require": {
+        "paypal/paypal-checkout-sdk": "^1.0",
+        "phpgangsta/googleauthenticator": "dev-master"
+    }
+}
+
