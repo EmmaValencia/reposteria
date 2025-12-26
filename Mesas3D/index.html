@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Galería de Mesas 3D - Sabores de Cristal</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Recorrido virtual de mesas temáticas.">
+    <!-- Usamos una versión moderna de A-Frame (1.6.0) -->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <!-- Importamos los componentes de movimiento -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.5.0/dist/aframe-extras.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background: #1a1a1a;
+        }
+        
+        /* Barra de navegación superior */
+        #navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .nav-brand {
+            color: #D4AF37;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-button {
+            background: #D4AF37;
+            color: #8B0000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .nav-button:hover {
+            background: #FFD700;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        #ui-overlay {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            z-index: 1000;
+            color: white;
+            background: rgba(0,0,0,0.9);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 320px;
+            border: 2px solid #D4AF37;
+            backdrop-filter: blur(10px);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        #ui-overlay h2 {
+            margin: 0 0 20px 0;
+            color: #D4AF37;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            text-align: center;
+            border-bottom: 1px solid #D4AF37;
+            padding-bottom: 10px;
+        }
+        
+        .controls-section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            color: #D4AF37;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 8px;
+        }
+        
+        .control-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 5px 0;
+        }
+        
+        .key {
+            background: #8B0000;
+            color: #D4AF37;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-right: 12px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #D4AF37;
+        }
+        
+        .control-description {
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .tips {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid #D4AF37;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 15px;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 6px 0;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        .tip-item i {
+            color: #D4AF37;
+            margin-right: 8px;
+            margin-top: 2px;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #D4AF37;
+            font-size: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.9);
+            padding: 30px 50px;
+            border-radius: 15px;
+            border: 2px solid #D4AF37;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+        
+        .error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff6b6b;
+            font-size: 18px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #ff6b6b;
+            text-align: center;
+            max-width: 500px;
+        }
+    </style>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+       <link rel="icon" type="image/png" sizes="16x16" href="../Images/LOGO.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Images/LOGO.png">
+
+</head>
+<body>
+    <!-- Barra de navegación superior -->
+    <nav id="navbar">
+        <a href="/index.php" class="nav-brand">
+            <i class="fas fa-gem me-2"></i>Sabores de Cristal
+        </a>
+        <div>
+            <a href="/profile.php" class="nav-button">
+                <i class="fas fa-arrow-left me-2"></i>Volver al Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div id="ui-overlay">
+        <h2><i class="fas fa-vr-cardboard me-2"></i>Galería de Mesas 3D</h2>
+        
+        <div class="controls-section">
+            <div class="section-title">
+                <i class="fas fa-keyboard"></i>
+                <span>Controles de Navegación</span>
+            </div>
+            
+            <div class="control-item">
+                <span class="key">W</span>
+                <span class="control-description">Avanzar hacia adelante</span>
+            </div>
+            <div class="control-item">
+                <span class="key">S</span>
+                <span class="control-description">Retroceder / Moverse atrás</span>
+            </div>
+            <div class="control-item">
+                <span class="key">A</span>
+                <span class="control-description">Moverse a la izquierda</span>
+            </div>
+            <div class="control-item">
+                <span class="key">D</span>
+                <span class="control-description">Moverse a la derecha</span>
+            </div>
+            <div class="control-item">
+                <span class="key">Q</span>
+                <span class="control-description">Volar hacia abajo</span>
+            </div>
+            <div class="control-item">
+                <span class="key">E</span>
+                <span class="control-description">Volar hacia arriba</span>
+            </div>
+            <div class="control-item">
+                <span class="key">R</span>
+                <span class="control-description">Resetear posición</span>
+            </div>
+        </div>
+
+        <div class="tips">
+            <div class="tip-item">
+                <i class="fas fa-mouse"></i>
+                <span>Mueve el ratón para mirar alrededor</span>
+            </div>
+            <div class="tip-item">
+                <i class="fas fa-search"></i>
+                <span>Acércate a las mesas para inspeccionar detalles</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">
+        <i class="fas fa-spinner fa-spin me-2"></i>
+        Cargando galería 3D...
+    </div>
+
+    <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+    <!-- Escena A-Frame simplificada y corregida -->
+    <a-scene 
+        renderer="colorManagement: true; antialias: true"
+        loading-screen="enabled: false"
+        cursor="rayOrigin: mouse">
+    
+    
+            <!-- Modelos GLB -->
+<a-assets timeout="30000">
+    <a-asset-item id="modeloSanValentin" src="MESASANVALENTIN.glb"></a-asset-item>
+    <a-asset-item id="modeloNavidad" src="MESANAVIDAD.glb"></a-asset-item>
+    <a-asset-item id="modeloHalloween" src="MESAHALLOWEEN.glb"></a-asset-item>
+    
+    <a-asset-item id="modeloDeCitas" src="MESADECITAS.glb"></a-asset-item>
+    <a-asset-item id="modeloBoda" src="MESASDEBODA.glb"></a-asset-item>
+    
+    <img id="floorTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg" crossorigin="anonymous">
+</a-assets>
+
+        <!-- Suelo -->
+    <a-plane
+        color="#8F6215"
+        roughness="0.8"
+        rotation="-90 0 0"
+        width="100"
+        height="100"
+        repeat="20 20"
+        position="0 0.5 0">  
+    </a-plane>
+
+        <!-- Cielo -->
+        <a-sky color="#000000"></a-sky>
+
+        <!-- Iluminación -->
+        <a-light type="ambient" color="#FFFFFF" intensity="0.6"></a-light>
+        <a-light type="directional" 
+                 color="#FFFFFF" 
+                 intensity="0.8" 
+                 position="10 15 5"
+                 cast-shadow="true">
+        </a-light>
+
+<!-- MESAS - Distribuidas en círculo más amplio para evitar superposición -->
+
+<!-- Mesa San Valentín -->
+<a-entity id="mesaSanValentin" position="-12 0.2 0" rotation="0 90 0">
+    <a-gltf-model 
+        src="#modeloSanValentin" 
+        scale="1 1 1"
+        shadow="cast: true; receive: true">
+    </a-gltf-model>
+</a-entity>
+
+<!-- Mesa Navidad -->
+<a-entity id="mesaNavidad" position="0 0 -12" rotation="0 0 0">
+    <a-gltf-model 
+        src="#modeloNavidad" 
+        scale="1 1 1"
+        shadow="cast: true; receive: true">
+    </a-gltf-model>
+</a-entity>
+
+<!-- Mesa Halloween -->
+<a-entity id="mesaHalloween" position="12 0.1 0" rotation="0 -90 0">
+    <a-gltf-model 
+        src="#modeloHalloween" 
+        scale="1 1 1"
+        shadow="cast: true; receive: true">
+    </a-gltf-model>
+</a-entity>
+
+<!-- Mesa de Citas -->
+<a-entity id="mesaDeCitas" position="0 0 12" rotation="0 180 0">
+    <a-gltf-model 
+        src="#modeloDeCitas" 
+        scale="1 1 1"
+        shadow="cast: true; receive: true">
+    </a-gltf-model>
+</a-entity>
+
+<!-- Mesa de Boda -->
+<a-entity id="mesaBoda" position="0 0.3 0" rotation="0 0 0">
+    <a-gltf-model 
+        src="#modeloBoda" 
+        scale="1 1 1"
+        shadow="cast: true; receive: true">
+    </a-gltf-model>
+</a-entity>
+        <!-- Jugador -->
+        <a-entity 
+            id="rig"
+            position="0 1.6 10"
+            movement-controls="fly: true; speed: 0.1">
+            
+            <a-entity 
+                id="camera"
+                camera="active: true"
+                position="0 0 0"
+                look-controls="pointerLockEnabled: true"
+                wasd-controls="fly: true; acceleration: 100">
+                
+                <a-cursor 
+                    color="#D4AF37"
+                    fuse="true"
+                    fuse-timeout="500">
+                </a-cursor>
+            </a-entity>
+        </a-entity>
+
+
+    </a-scene>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scene = document.querySelector('a-scene');
+            const loading = document.getElementById('loading');
+            const errorMessage = document.getElementById('errorMessage');
+            const rig = document.getElementById('rig');
+
+            let modelsLoaded = 0;
+            const totalModels = 5;
+            let hasErrors = false;
+
+            // Verificar carga de modelos
+            function checkModelLoad() {
+                modelsLoaded++;
+                console.log(`Modelo ${modelsLoaded}/${totalModels} cargado`);
+                
+                if (modelsLoaded === totalModels) {
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 1000);
+                }
+            }
+
+            // Manejar errores de modelos
+            function handleModelError(modelName, error) {
+                console.error(`Error cargando ${modelName}:`, error);
+                hasErrors = true;
+                errorMessage.innerHTML = `
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <h3>Error cargando modelos</h3>
+                    <p>No se pudo cargar: ${modelName}</p>
+                    <p>Verifica que los archivos .glb estén en la carpeta correcta</p>
+                    <small>Ruta esperada: ../${modelName}.glb</small>
+                `;
+                errorMessage.style.display = 'block';
+            }
+
+            // Ocultar loading cuando la escena esté lista
+            scene.addEventListener('loaded', function() {
+                console.log('Escena A-Frame cargada');
+                
+                // Verificar modelos después de un tiempo
+                setTimeout(() => {
+                    if (modelsLoaded < totalModels && !hasErrors) {
+                        loading.innerHTML = `
+                            <i class="fas fa-spinner fa-spin me-2"></i>
+                            <div>Cargando modelos... (${modelsLoaded}/${totalModels})</div>
+                            <small>Esto puede tomar unos segundos</small>
+                        `;
+                    }
+                }, 3000);
+
+                // Timeout final
+                setTimeout(() => {
+                    if (modelsLoaded < totalModels) {
+                        errorMessage.innerHTML = `
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <h3>Error de carga</h3>
+                            <p>Algunos modelos no se cargaron correctamente</p>
+                            <p>Modelos cargados: ${modelsLoaded}/${totalModels}</p>
+                            <small>Verifica la consola para más detalles</small>
+                        `;
+                        errorMessage.style.display = 'block';
+                        loading.style.display = 'none';
+                    }
+                }, 15000);
+            });
+
+            // Monitorear carga de modelos individuales
+            const modelIds = [
+                'modeloSanValentin', 
+                'modeloNavidad', 
+                'modeloHalloween', 
+                'modeloDeCitas', 
+                'modeloBoda'
+            ];
+
+            modelIds.forEach(modelId => {
+                const modelElement = document.querySelector(`[src="#${modelId}"]`);
+                if (modelElement) {
+                    modelElement.addEventListener('loaded', () => checkModelLoad());
+                    modelElement.addEventListener('error', (e) => 
+                        handleModelError(modelId, e.detail)
+                    );
+                }
+            });
+
+            // Controles de teclado
+            document.addEventListener('keydown', function(event) {
+                const position = rig.getAttribute('position');
+                
+                switch(event.key.toLowerCase()) {
+                    case 'e': // Volar arriba
+                        rig.setAttribute('position', {
+                            x: position.x,
+                            y: position.y + 1,
+                            z: position.z
+                        });
+                        break;
+                    case 'q': // Volar abajo
+                        if (position.y > 0.5) {
+                            rig.setAttribute('position', {
+                                x: position.x,
+                                y: position.y - 1,
+                                z: position.z
+                            });
+                        }
+                        break;
+                    case 'r': // Resetear posición
+                        rig.setAttribute('position', {x: 0, y: 1.6, z: 10});
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
